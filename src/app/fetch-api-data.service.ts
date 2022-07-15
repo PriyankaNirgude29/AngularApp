@@ -15,7 +15,11 @@ export class FetchApiDataService {
 
   constructor(private http: HttpClient) { }
 
-  // Making the api call for the user registration endpoint
+  /**
+   * calls API end-point to register a new user
+   * @param userDetails {any}
+   * @returns a new user object in json format 
+   * */
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(
@@ -23,6 +27,11 @@ export class FetchApiDataService {
     );
   }
 
+   /**
+   * calls API endpoin to log a user in
+   * @param userDetails {any}
+   * @returns user's data in json format
+   */
   public userLogin(userDetails: any): Observable<any> {
     return this.http
       .post(apiUrl + 'login', userDetails)
@@ -30,7 +39,11 @@ export class FetchApiDataService {
         catchError(this.handleError)
       );
   }
-  
+
+   /**
+   * calls API end-point to get all movies
+   * @returns array of all movies in json format
+   */
   getAllMovies(): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -46,6 +59,10 @@ export class FetchApiDataService {
       );
   }
 
+/**
+   * calls API end-point to get a single movie
+   * @returns a single movie in json format
+   */
   getSingleMovie(title: any): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -61,6 +78,10 @@ export class FetchApiDataService {
       );
   }
 
+  /**
+   * calls API end-point to get data about a specific genre by name
+   * @returns a genre's data in json format
+   */
   getGenre(name: any): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -76,6 +97,10 @@ export class FetchApiDataService {
       );
   }
 
+  /**
+   * calls API end-point to get data about a specific director by name
+   * @returns a director's data in json format
+   */
   getDirector(name: any): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -91,6 +116,10 @@ export class FetchApiDataService {
       );
   }
 
+  /**
+   * calls API end-point to get a logged in user's data
+   * @returns user's data
+   */
   getUser(User: any): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -108,6 +137,11 @@ export class FetchApiDataService {
       );
   }
 
+  /**
+   * calls API end-point to add a specific movie to the user's favorites
+   * @param movieID {string}
+   * @returns the updated user's list of favorite movies
+   */
   addFavoriteMovie(movieID: string): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -125,6 +159,11 @@ export class FetchApiDataService {
       );
   }
 
+  /**
+   * calls API end-point to remove a movie from user's favorites
+   * @param movieID {string}
+   * @returns the updated user's list of favorite movies
+   */
   removeFavoriteMovie(movieID: any): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -142,6 +181,11 @@ export class FetchApiDataService {
       );
   }
 
+  /**
+   * calls API end-point to edit a user's data
+   * @param updateDetails {object}
+   * @returns user's updated data ind json format
+   */
   editUser(updateDetails: any): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -158,7 +202,11 @@ export class FetchApiDataService {
         catchError(this.handleError)
       );
   }
-
+ 
+  /**
+   * calls API end-point to delete a current user from database
+   * @returns delete status
+   */
   deleteUser(): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');

@@ -34,6 +34,11 @@ export class ProfileComponent implements OnInit {
     
   }
 
+   /**
+   * calls API end-piont to get the user's data
+   * @function getUser
+   * @returns user's data in json format
+   */
   getUser(): void {
     let movies: any[] = [];
     const user = localStorage.getItem('user');
@@ -53,14 +58,21 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-
+/**
+   * opens the EditProfileComponent for a user to change their personal data
+   */
   openEditProfileDialog(): void {
     this.dialogRef.open(EditProfileComponent, {
       width: '300px'
     })
   }
 
-  deleteProfile(): void {
+  /**
+   * calls API end-point to remove a current logged in user from database
+   * @function deleteUserProfile
+   * @returns status for user has been removed
+   */
+ deleteProfile(): void {
     if (confirm('Are you sure you want to delete your account? This cannnot be undone.')) {
       this.router.navigate(['welcome']).then(() => {
         this.snackBar.open('You have successfully deleted your account!', 'OK', {
@@ -73,6 +85,13 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
+
+  /**
+   * calls API end-point to remove a favorite movie of current logged in user from database
+   * @param id { string }
+   * @function removeFavoriteMovie
+   * @returns status for favorite movie has been removed
+   */
 
   removeFav(id: string): void {
     this.fetchApiData.removeFavoriteMovie(id).subscribe((res: any) => {

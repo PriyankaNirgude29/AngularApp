@@ -25,6 +25,10 @@ export class MovieCardComponent implements OnInit {
    
   }
 
+   /**
+   * uses API end-point to get a list of all movies in json format
+   * @function getAllMovies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe(
       (resp: any) => {
@@ -35,6 +39,11 @@ export class MovieCardComponent implements OnInit {
     );
 }
 
+/**
+   * gets the current logged in user's data
+   * @function getUser
+   * @returns the current logged in user's data
+   */
 getUser(): void {
   const username = localStorage.getItem('user');
   this.fetchApiData.getUser(username).subscribe((resp: any) => {
@@ -42,7 +51,12 @@ getUser(): void {
     this.currentFavs = resp.FavoriteMovies;
   });
 }
-
+/**
+   * opens the dialog to display the information from DirectorCardComponent
+   * @param Name {string}
+   * @param Bio {string}
+   * @param Birth {string}
+   */
 openDirectorDialog(Name: string, Bio: string, Birth: Date): void {
   this.dialogRef.open(DirectorComponent, {
     data: {
@@ -55,7 +69,11 @@ openDirectorDialog(Name: string, Bio: string, Birth: Date): void {
   });
 
 }
-
+/**
+   * opens the dialog to display the information from GenreCardComponent
+   * @param Name {string}
+   * @param Description {string}
+   */
 openGenreDialog(Name: string, Description: string): void {
   this.dialogRef.open(GenreComponent, {
     data: {
@@ -66,6 +84,12 @@ openGenreDialog(Name: string, Description: string): void {
     width: '500px'
   });
 }
+
+/**
+   * opens the dialog to display the information from SynopsisCardComponent
+   * @param title {string}
+   * @param description {string}
+   */
 
 openSynopsisDialog(title: string, description: string): void {
   this.dialogRef.open(SynopsisComponent, {
@@ -79,10 +103,22 @@ openSynopsisDialog(title: string, description: string): void {
 
 }
 
+/**
+   * gets the current favorite movie if exists
+   * @param id { string }
+   * @returns favorite movie if exists
+   */
+
 isFav(id: string): boolean {
   return this.currentFavs.includes(id);
 }
 
+/**
+   * use API end-point to add a movie to user's favorites
+   * @function addFavoriteMovie
+   * @param id {string}
+   * @returns an array of the movie object in json format
+   */
 
 addToFavoriteMovies(id: string): void {
   console.log(id);
@@ -92,6 +128,12 @@ addToFavoriteMovies(id: string): void {
   })
 }
 
+ /**
+   * user API end-point to remove a movie from user's favorites
+   * @function deleteFavoriteMovie
+   * @param id {string}
+   * @returns updated user's data in json format
+   */
 removeFromFavoriteMovies(id: string): void {
   console.log(id);
   this.fetchApiData.removeFavoriteMovie(id).subscribe((result) => {
